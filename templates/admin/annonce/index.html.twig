@@ -24,7 +24,8 @@
 				<td>Description</td>
 				<td>Price</td>
 				<td>Vendu</td>
-				<td>Status</td>Edition<td></td>
+				<td>Status</td>
+				<td>Edition</td>
 			</tr>
 			{% for annonce in annonces %}
 				<tr>
@@ -32,13 +33,15 @@
 					<td>{{annonce.description}}</td>
 					<td>{{annonce.price}}</td>
 					{% if annonce.isSold == false %}
-						<p>A vendre</p>
+						<td>A vendre</td>
 					{% else %}
-						<p>Vendu</p>
+						<td>Vendu</td>
 					{% endif %}
-					<p>{{annonce.status}}</p>
-					<small>{{annonce.createdAt|date('Y/m/d')}}</small>
-
+					<td>{{annonce.status}}</td>
+					<td>{{annonce.createdAt|date('Y/m/d')}}</td>
+					<td>
+						<a>edition</a>
+					</td>
 				{% endfor %}
 			</table>
 		</div>
