@@ -22,9 +22,11 @@ class AnnonceController extends AbstractController
         //$annonceRepository = $doctrine->getRepository(Annonce::class); // = 'App\Entity\Annonce'
         // on récupère toutes les annonces grâce au repository
         //$annonces = $annonceRepository->findAll();
-        
+
         return $this->render('annonce/index.html.twig', [
-            'annonces' => $annonceRepository->findAll(),
+            'annonces' => $annonceRepository->findBy([
+                'isSold' => false
+            ]),
         ]);
     }
 
@@ -60,8 +62,7 @@ class AnnonceController extends AbstractController
             ->setPrice(100)
             ->setIsSold(false)
             // ne pas oublier use DateTimeImmutable ou faire new \DateTimeImmutable()
-            ->setCreatedAt(new DateTimeImmutable());
-        ;
+            ->setCreatedAt(new DateTimeImmutable());;
 
         dump($annonce);
 
@@ -77,7 +78,7 @@ class AnnonceController extends AbstractController
         $entityManager->flush();
 
         dump($annonce);
-        
+
         die('nouvelle annonce');
     }
 

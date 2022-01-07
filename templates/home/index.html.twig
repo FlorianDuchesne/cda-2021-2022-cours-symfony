@@ -1,14 +1,29 @@
 {% extends "layout/full_width.html.twig" %}
 
 {% block content %}
-    <h1>{{ title }}</h1>
+	<table>
+		<tr>
+			<th>Title</th>
+			<th>Created At</th>
+			<th>Price</th>
+			<th>Available ?</th>
+			<th>Status</th>
+			<th>Actions</th>
+		</tr>
 
-    <a href="#" class="btn btn-primary">Primary</a>
-    <p>{{ content }}</p>
-    <span>Date du jour : {{ date|date("d/m/Y") }}</span>
-    <ul>
-        {% for d in data %}
-            <li>{{ d }}</li>
-        {% endfor %}
-    </ul>
+		{% for annonce in annonces %}
+			<tr>
+				<td>{{ annonce.title }}</td>
+				<td>{{ annonce.createdAt|date('d/m/Y') }}</td>
+				<td>{{ annonce.price }}</td>
+				<td>
+					{{ annonce.isSold ? 'Not available' : 'Available' }}
+				</td>
+				<td>
+					{{ ('annonce.status_' ~ annonce.status)|trans({}, 'annonce') }}
+				</td>
+				<td>{{ 'action.read_more'|trans }}</td>
+			</tr>
+		{% endfor %}
+	</table>
 {% endblock %}
